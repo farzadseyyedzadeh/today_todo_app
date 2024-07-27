@@ -80,16 +80,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBody: true,
         appBar: AppBar(
           title: const Text('Today'),
           centerTitle: true,
         ),
         drawer: const SideDrawer(),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.yellow,
+          shape: const CircleBorder(),
           onPressed: createNewTask,
           child: const Icon(Icons.add),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: const BottomNavBar(),
         body: db.todoList.isEmpty
             ? const NoTask()
