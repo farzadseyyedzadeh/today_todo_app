@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:today_todo_app/data/database.dart';
 import 'package:today_todo_app/widgets/dialog_box.dart';
 import 'package:today_todo_app/widgets/no_task.dart';
+import 'package:today_todo_app/widgets/side_drawer.dart';
 import 'package:today_todo_app/widgets/task_card.dart';
 import 'package:today_todo_app/widgets/bottom_navigation_bar.dart';
 
@@ -83,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('Today'),
           centerTitle: true,
         ),
+        drawer: const SideDrawer(),
         floatingActionButton: FloatingActionButton(
           onPressed: createNewTask,
           child: const Icon(Icons.add),
