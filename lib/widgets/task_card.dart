@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class TaskCard extends StatelessWidget {
   final String title;
   final bool isDone;
+  final DateTime doneTime;
   final void Function(bool?)? onPressed;
   final Function(BuildContext)? deleteFunction;
   const TaskCard(
@@ -11,6 +12,7 @@ class TaskCard extends StatelessWidget {
       required this.title,
       required this.isDone,
       required this.onPressed,
+      required this.doneTime,
       required this.deleteFunction});
 
   @override
@@ -36,13 +38,22 @@ class TaskCard extends StatelessWidget {
                 activeColor: Colors.green,
                 checkColor: Colors.white,
               ),
-              Text(
-                title,
-                style: TextStyle(
-                  decoration:
-                      isDone ? TextDecoration.lineThrough : TextDecoration.none,
-                ),
-              ),
+              isDone
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                              decoration: TextDecoration.lineThrough),
+                        ),
+                        Text('completed  $doneTime')
+                      ],
+                    )
+                  : Text(
+                      title,
+                    ),
             ],
           ),
         ),

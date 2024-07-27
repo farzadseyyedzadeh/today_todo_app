@@ -65,7 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
       db.todoList.removeAt(index);
     });
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('task deleted'),
+      duration: const Duration(seconds: 2),
+      backgroundColor: Colors.red.shade900,
+      showCloseIcon: true,
+      content: const Text('task deleted'),
       action: SnackBarAction(
           label: 'UNDO',
           onPressed: () {
@@ -101,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return TaskCard(
                     title: db.todoList[index][0],
+                    doneTime: DateTime.now(),
                     isDone: db.todoList[index][1],
                     onPressed: (value) => checkBoxChanged(value, index),
                     deleteFunction: (context) => deleteTask(index),
