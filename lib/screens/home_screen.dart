@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:today_todo_app/data/database.dart';
+import 'package:today_todo_app/widgets/dialog_box.dart';
 import 'package:today_todo_app/widgets/no_task.dart';
 import 'package:today_todo_app/widgets/task_card.dart';
-
-import '../widgets/bottom_navigation_bar.dart';
+import 'package:today_todo_app/widgets/bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,25 +14,82 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void onPressed(value) {
+  final _myBox = Hive.box('mybox');
+  ToDoDataBase db = ToDoDataBase();
+  @override
+  void initState() {
+    if (_myBox.get('TODOLIST') == null) {
+      db.createInitialData();
+    } else {
+      db.loadData();
+    }
+    super.initState();
+  }
+
+  final _textController = TextEditingController();
+
+  checkBoxChanged(bool? value, int index) {
     setState(() {
-      value = !value;
+      db.todoList[index][1] = !db.todoList[index][1];
     });
+    db.updateData();
+  }
+
+  void saveNewTask() {
+    setState(() {
+      db.todoList.add([_textController.text, false]);
+      _textController.clear();
+    });
+    Navigator.of(context).pop();
+    db.updateData();
+  }
+
+  void createNewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: _textController,
+          onCancel: () => Navigator.of(context).pop(),
+          onSave: saveNewTask,
+        );
+      },
+    );
+    db.updateData();
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      db.todoList.removeAt(index);
+    });
+    db.updateData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Today'),
-        centerTitle: true,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: const BottomNavBar(),
-      body: NoTask(),
-    );
+        appBar: AppBar(
+          title: const Text('Today'),
+          centerTitle: true,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: createNewTask,
+          child: const Icon(Icons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        bottomNavigationBar: const BottomNavBar(),
+        body: db.todoList.isEmpty
+            ? const NoTask()
+            : ListView.builder(
+                itemCount: db.todoList.length,
+                itemBuilder: (context, index) {
+                  return TaskCard(
+                    title: db.todoList[index][0],
+                    isDone: db.todoList[index][1],
+                    onPressed: (value) => checkBoxChanged(value, index),
+                    deleteFunction: (context) => deleteTask(index),
+                  );
+                },
+              ));
   }
 }

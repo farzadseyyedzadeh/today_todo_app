@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'today.dart';
 
-void main() {
-  runApp(Today());
+void main() async {
+  await Hive.initFlutter();
+  var box = await Hive.openBox('mybox');
+  runApp(const Today());
 }

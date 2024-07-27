@@ -1,25 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:today_todo_app/models/task.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TaskCard extends StatelessWidget {
   final String title;
-  bool isDone;
-  void Function()? onPressed;
-  TaskCard(
+  final bool isDone;
+  final void Function(bool?)? onPressed;
+  final Function(BuildContext)? deleteFunction;
+  const TaskCard(
       {super.key,
       required this.title,
       required this.isDone,
-      required this.onPressed});
+      required this.onPressed,
+      required this.deleteFunction});
 
   @override
   Widget build(BuildContext context) {
-    final task = Task(title: title, isDone: isDone, onPressed: onPressed);
-    return Card(
-      child: Row(
-        children: [
-          Checkbox(value: task.isDone, onChanged: (value) {}),
-          Text(task.title),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 30.0),
+      child: Slidable(
+        endActionPane: ActionPane(motion: const StretchMotion(), children: [
+          SlidableAction(
+            onPressed: deleteFunction,
+            icon: Icons.delete,
+            backgroundColor: Colors.red,
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+        ]),
+        child: Card(
+          color: Colors.blueGrey.shade200,
+          child: Row(
+            children: [
+              Checkbox(
+                value: isDone,
+                onChanged: onPressed,
+                activeColor: Colors.green,
+                checkColor: Colors.white,
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                  decoration:
+                      isDone ? TextDecoration.lineThrough : TextDecoration.none,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
