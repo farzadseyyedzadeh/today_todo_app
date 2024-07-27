@@ -59,9 +59,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void deleteTask(int index) {
+    final _lastRemovedTask = db.todoList[index];
     setState(() {
       db.todoList.removeAt(index);
     });
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('task deleted'),
+      action: SnackBarAction(
+          label: 'UNDO',
+          onPressed: () {
+            setState(() {
+              db.todoList.insert(index, _lastRemovedTask);
+            });
+          }),
+    ));
     db.updateData();
   }
 
