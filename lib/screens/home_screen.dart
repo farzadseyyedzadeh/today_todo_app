@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:today_todo_app/data/database.dart';
+import 'package:today_todo_app/theme/my_color.dart';
 import 'package:today_todo_app/widgets/dialog_box.dart';
 import 'package:today_todo_app/widgets/no_task.dart';
 import 'package:today_todo_app/widgets/side_drawer.dart';
@@ -66,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: const Duration(seconds: 2),
-      backgroundColor: Colors.red.shade900,
+      backgroundColor: MyColor().fireEngineRed,
       showCloseIcon: true,
       content: const Text('task deleted'),
       action: SnackBarAction(
@@ -83,14 +84,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: MyColor().antiFlashWhite,
         extendBody: true,
         appBar: AppBar(
+          backgroundColor: MyColor().spaceCadet,
+          foregroundColor: MyColor().antiFlashWhite,
           title: const Text('Today'),
           centerTitle: true,
         ),
         drawer: const SideDrawer(),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.yellow,
+          backgroundColor: MyColor().pantoneRed,
           shape: const CircleBorder(),
           onPressed: createNewTask,
           child: const Icon(Icons.add),

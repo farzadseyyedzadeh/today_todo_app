@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:today_todo_app/theme/my_color.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -9,7 +10,7 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
-      color: Colors.blueGrey.shade200,
+      color: MyColor().spaceCadet,
       height: 60.0,
       padding: const EdgeInsets.symmetric(horizontal: 40),
       notchMargin: 5.0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:today_todo_app/theme/my_color.dart';
 
 class MyButton extends StatelessWidget {
   const MyButton({super.key, required this.text, required this.onPressed});
@@ -10,8 +11,8 @@ class MyButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blueGrey.shade700,
-          foregroundColor: Colors.blueGrey.shade100),
+          backgroundColor: MyColor().spaceCadet,
+          foregroundColor: MyColor().antiFlashWhite),
       child: Text(text),
     );
   }

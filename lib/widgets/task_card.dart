@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:today_todo_app/theme/my_color.dart';
 
 class TaskCard extends StatelessWidget {
   final String title;
@@ -24,12 +25,12 @@ class TaskCard extends StatelessWidget {
           SlidableAction(
             onPressed: deleteFunction,
             icon: Icons.delete,
-            backgroundColor: Colors.red,
+            backgroundColor: MyColor().fireEngineRed,
             borderRadius: BorderRadius.circular(15.0),
           ),
         ]),
         child: Card(
-          color: Colors.blueGrey.shade200,
+          color: MyColor().spaceCadet,
           child: Row(
             children: [
               Checkbox(
