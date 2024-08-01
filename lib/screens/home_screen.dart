@@ -60,6 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
     db.updateData();
   }
 
+  onCheck(int index) {
+    setState(() {
+      db.todoList[index][1] = !db.todoList[index][1];
+    });
+    db.updateData();
+  }
+
   void deleteTask(int index) {
     final _lastRemovedTask = db.todoList[index];
     setState(() {
@@ -111,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     doneTime: DateTime.now(),
                     isDone: db.todoList[index][1],
                     onPressed: (value) => checkBoxChanged(value, index),
+                    onCheck: (context) => onCheck(index),
                     deleteFunction: (context) => deleteTask(index),
                   );
                 },

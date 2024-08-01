@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:today_todo_app/screens/profile_screen.dart';
 import 'package:today_todo_app/theme/my_color.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
     super.key,
   });
 
+  @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -30,7 +36,13 @@ class BottomNavBar extends StatelessWidget {
                 Icons.person,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
+                  ));
+                });
+              },
             ),
           ]),
     );
