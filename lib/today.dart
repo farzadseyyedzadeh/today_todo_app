@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:today_todo_app/screens/first_screen.dart';
 import 'screens/home_screen.dart';
 
 class Today extends StatelessWidget {
@@ -8,7 +9,7 @@ class Today extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: FirstScreen(),
     );
   }
 }
