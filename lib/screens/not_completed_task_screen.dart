@@ -8,14 +8,14 @@ import 'package:today_todo_app/widgets/side_drawer.dart';
 import 'package:today_todo_app/widgets/task_card.dart';
 import 'package:today_todo_app/widgets/bottom_navigation_bar.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class NotCompletedTaskScreen extends StatefulWidget {
+  const NotCompletedTaskScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<NotCompletedTaskScreen> createState() => _NotCompletedTaskScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _NotCompletedTaskScreenState extends State<NotCompletedTaskScreen> {
   final _myBox = Hive.box('mybox');
   ToDoDataBase db = ToDoDataBase();
   @override
@@ -106,21 +106,24 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: createNewTask,
           child: const Icon(Icons.add),
         ),
-        // bottomNavigationBar: const BottomNavBar(),
-        body: db.todoList.isEmpty
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: const BottomNavBar(),
+        body: (db.todoList.isEmpty
             ? const NoTask()
             : ListView.builder(
                 itemCount: db.todoList.length,
                 itemBuilder: (context, index) {
-                  return TaskCard(
-                    title: db.todoList[index][0],
-                    doneTime: DateTime.now(),
-                    isDone: db.todoList[index][1],
-                    onPressed: (value) => checkBoxChanged(value, index),
-                    onCheck: (context) => onCheck(index),
-                    deleteFunction: (context) => deleteTask(index),
-                  );
+                  if (db.todoList[index][1] = true) {
+                    return TaskCard(
+                      title: db.todoList[index][0],
+                      doneTime: DateTime.now(),
+                      isDone: db.todoList[index][1],
+                      onPressed: (value) => checkBoxChanged(value, index),
+                      onCheck: (context) => onCheck(index),
+                      deleteFunction: (context) => deleteTask(index),
+                    );
+                  }
                 },
-              ));
+              )));
   }
 }

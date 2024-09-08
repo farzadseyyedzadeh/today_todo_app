@@ -18,7 +18,12 @@ class MyButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           backgroundColor: MyColor().spaceCadet,
           foregroundColor: MyColor().antiFlashWhite),
-      child: Container(width: myWidth, child: Center(child: Text(text))),
+      child: Container(
+        width: myWidth,
+        child: Center(
+          child: Text(text),
+        ),
+      ),
     );
   }
 }

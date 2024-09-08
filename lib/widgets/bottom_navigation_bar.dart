@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:today_todo_app/screens/profile_screen.dart';
 import 'package:today_todo_app/theme/my_color.dart';
+import '../screens/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
@@ -27,19 +27,25 @@ class _BottomNavBarState extends State<BottomNavBar> {
             IconButton(
               icon: const Icon(
                 Icons.task_alt_sharp,
-                color: Colors.black,
-              ),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.person,
-                color: Colors.black,
+                color: Colors.white,
               ),
               onPressed: () {
                 setState(() {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ProfileScreen(),
+                    builder: (context) => const HomeScreen(),
+                  ));
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
                   ));
                 });
               },

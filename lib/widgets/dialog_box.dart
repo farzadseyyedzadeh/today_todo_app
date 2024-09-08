@@ -24,7 +24,7 @@ class DialogBox extends StatelessWidget {
             TextField(
               controller: controller,
               decoration: const InputDecoration(
-                  hintText: 'type...', border: OutlineInputBorder()),
+                  hintText: '...', border: OutlineInputBorder()),
             ),
             const SizedBox(
               height: 10.0,

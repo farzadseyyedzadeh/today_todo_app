@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:today_todo_app/theme/my_color.dart';
+import 'package:intl/intl.dart';
 
 class TaskCard extends StatelessWidget {
   final String title;
@@ -20,6 +21,8 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final f = new DateFormat('yyyy-MM-dd hh:mm');
+    final formatedDoneTime = f.format(doneTime);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10.0),
       child: Slidable(
@@ -65,7 +68,7 @@ class TaskCard extends StatelessWidget {
                               decoration: TextDecoration.lineThrough),
                         ),
                         Text(
-                          'completed  $doneTime',
+                          'completed  $formatedDoneTime',
                           style: TextStyle(color: MyColor().antiFlashWhite),
                         )
                       ],
